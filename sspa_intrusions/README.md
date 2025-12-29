@@ -41,7 +41,7 @@ sudo touch /var/log/sspa_whitelist.txt
 ### Mode analyse uniquement
 
 ```bash
-sspa_intrusions -t 5
+./sspa_intrusions.sh -t 5
 ```
 
 * `-t` : seuil d'échecs avant de considérer une IP comme suspecte (défaut : 5)
@@ -50,7 +50,7 @@ sspa_intrusions -t 5
 ### Mode blocage automatique
 
 ```bash
-sspa_intrusions -t 5 -b
+./sspa_intrusions.sh  -t 5 -b
 ```
 
 * `-b` : active le blocage via iptables/ip6tables
