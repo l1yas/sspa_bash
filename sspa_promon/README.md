@@ -33,7 +33,7 @@ Ce script a été conçu dans une optique **sécurité / administration système
 1. Cloner le dépôt :
 
    ```
-   git clone https://github.com/ton-compte/sspa_promon.git
+   git clone https://github.com/l1yas/sspa_bash
    ```
 2. Rendre le script exécutable :
 
