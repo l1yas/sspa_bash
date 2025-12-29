@@ -24,28 +24,34 @@ Ce script analyse les logs d'authentification, identifie les adresses IP suspect
 
 ## Installation
 
-1. Copier le script dans /usr/local/bin :
+Rendre le script exécutable :
 
-sudo cp sspa_intrusions /usr/local/bin/sspa_intrusions
-sudo chmod +x /usr/local/bin/sspa_intrusions
+```bash
+chmod +x sspa_intrusions.sh
+```
 
 2. Optionnel : créer une whitelist pour IP autorisées :
 
+```bash
 sudo touch /var/log/sspa_whitelist.txt
-
+```
 
 ## Utilisation
 
 ### Mode analyse uniquement
 
+```bash
 sspa_intrusions -t 5
+```
 
 * `-t` : seuil d'échecs avant de considérer une IP comme suspecte (défaut : 5)
 * Affiche les IP suspectes et les journalise dans /var/log/sspa_intrusions.log
 
 ### Mode blocage automatique
 
+```bash
 sspa_intrusions -t 5 -b
+```
 
 * `-b` : active le blocage via iptables/ip6tables
 
