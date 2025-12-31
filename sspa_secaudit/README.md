@@ -140,4 +140,4 @@ Color coding for quick reference:
 
 
 
-This script is ideal for system administrators, penetration testers in the reconnaissance phase, or anyone wanting a quick and safe overview of a Linux server’s security posture.If you want, I can also create a **visual flowchart of the audit process** for the README to make it more intuitive and easy to understand. Do you want me to do that?
+This script is ideal for system administrators, penetration testers in the reconnaissance phase, or anyone wanting a quick and safe overview of a Linux server’s security posture.
