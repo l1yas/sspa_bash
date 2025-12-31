@@ -1,81 +1,92 @@
 # SSH Intrusion Detection Script (Bash)
 
-Script Bash pour détecter et bloquer automatiquement les tentatives de connexion SSH échouées sur un serveur Linux.
-Ce script analyse les logs d'authentification, identifie les adresses IP suspectes et peut les bloquer via iptables ou ip6tables.
+Bash script to automatically detect and block failed SSH login attempts on a Linux server.
+This script analyzes authentication logs, identifies suspicious IP addresses, and can block them via `iptables` or `ip6tables`.
 
 
-## Fonctionnalités
 
-* Analyse des logs SSH (/var/log/auth.log ou journalctl -t sshd)
-* Détection des tentatives échouées répétées (seuil configurable)
-* Extraction et filtrage des adresses IP suspectes
-* Blocage automatique des IP via iptables et ip6tables (optionnel)
-* Gestion d'une whitelist d'IP autorisées
-* Journalisation des incidents dans un fichier dédié
+## Features
+
+* Analyze SSH logs (`/var/log/auth.log` or `journalctl -t sshd`)
+* Detect repeated failed login attempts (configurable threshold)
+* Extract and filter suspicious IP addresses
+* Automatically block IPs via `iptables` and `ip6tables` (optional)
+* Manage a whitelist of allowed IPs
+* Log incidents to a dedicated file
 
 
-## Prérequis
 
-* Linux avec bash
-* Accès root pour le blocage d'IP
-* iptables et ip6tables installés
-* Journaux SSH disponibles (/var/log/auth.log ou journalctl)
+## Requirements
+
+* Linux with Bash
+* Root access to enable IP blocking
+* `iptables` and `ip6tables` installed
+* SSH logs available (`/var/log/auth.log` or via `journalctl`)
+
 
 
 ## Installation
 
-Rendre le script exécutable :
+Make the script executable:
 
 ```bash
 chmod +x sspa_intrusions.sh
 ```
 
-2. Optionnel : créer une whitelist pour IP autorisées :
+Optional: create a whitelist for allowed IPs:
 
 ```bash
 sudo touch /var/log/sspa_whitelist.txt
 ```
 
-## Utilisation
 
-### Mode analyse uniquement
+
+## Usage
+
+### Analysis-Only Mode
 
 ```bash
 ./sspa_intrusions.sh -t 5
 ```
 
-* `-t` : seuil d'échecs avant de considérer une IP comme suspecte (défaut : 5)
-* Affiche les IP suspectes et les journalise dans /var/log/sspa_intrusions.log
+* `-t` : threshold of failed attempts before marking an IP as suspicious (default: 5)
+* Displays suspicious IPs and logs them in `/var/log/sspa_intrusions.log`
 
-### Mode blocage automatique
+### Automatic Blocking Mode
 
 ```bash
-./sspa_intrusions.sh  -t 5 -b
+./sspa_intrusions.sh -t 5 -b
 ```
 
-* `-b` : active le blocage via iptables/ip6tables
+* `-b` : enables automatic blocking via `iptables` / `ip6tables`
 
-### Autres options
+### Other Options
 
-* `-l <logfile>` : Spécifier un fichier de log personnalisé
-* `-w <whitelist>` : Spécifier un fichier whitelist personnalisé
-* `-o <output>` : Spécifier un fichier journal personnalisé
-* `-h` : Afficher l'aide
+* `-l <logfile>` : Specify a custom log file
+* `-w <whitelist>` : Specify a custom whitelist file
+* `-o <output>` : Specify a custom output log file
+* `-h` : Display help
 
 
-## Exemple de logs détectés
 
+## Example of Detected Logs
+
+```
 192.168.56.42
 ::1
-
-## Fichiers générés
-
-* /var/log/sspa_intrusions.log : journalisation des IP suspectes et des blocages
-* /var/log/sspa_whitelist.txt : liste d'IP autorisées
+```
 
 
-## Sécurité
 
-* Le script doit être exécuté en root pour activer le blocage
-* Les IP locales (127.0.0.1 et ::1) sont automatiquement ignorées
-* Les IP présentes dans la whitelist ne seront jamais bloquées
+## Generated Files
+
+* `/var/log/sspa_intrusions.log` : logs of suspicious IPs and blocked addresses
+* `/var/log/sspa_whitelist.txt` : list of allowed IPs
+
+
+
+## Security Notes
+
+* The script must be run as root to enable blocking
+* Local IPs (`127.0.0.1` and `::1`) are automatically ignored
+* IPs listed in the whitelist will never be blocked
