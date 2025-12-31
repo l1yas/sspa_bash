@@ -1,127 +1,135 @@
 # SSPA ProMon
 
-**Script de Surveillance des Processus et Services (Bash)**
+**Process and Service Monitoring Script (Bash)**
+
+
 
 ## Description
 
-**SSPA ProMon** est un script Bash de supervision système destiné aux environnements Linux.
-Il permet de surveiller l’utilisation des ressources (CPU et mémoire), de détecter des processus suspects, de vérifier l’état de services critiques et d’appliquer des actions correctives automatiques en cas de défaillance.
+**SSPA ProMon** is a Bash system monitoring script designed for Linux environments.
+It monitors resource usage (CPU and memory), detects suspicious processes, checks the status of critical services, and can perform automatic corrective actions if a failure occurs.
 
-Ce script a été conçu dans une optique **sécurité / administration système**, avec une logique proche d’un agent de monitoring ou d’un mini EDR.
-
-## Fonctionnalités
-
-* Surveillance de l’utilisation CPU des processus
-* Surveillance de l’utilisation mémoire des processus
-* Détection de processus non autorisés ou suspects (blacklist)
-* Vérification de l’état des services critiques (SSH, Apache/Nginx, MySQL, etc.)
-* Redémarrage automatique des services défaillants
-* Alertes en cas de consommation anormale de ressources
-* Journalisation des événements de sécurité
+This script is intended for **system administration and security purposes**, with a design similar to a lightweight monitoring agent or mini EDR (Endpoint Detection and Response).
 
 
-## Prérequis
 
-* Système Linux
+## Features
+
+* Monitor CPU usage of processes
+* Monitor memory usage of processes
+* Detect unauthorized or suspicious processes (blacklist)
+* Check the status of critical services (SSH, Apache/Nginx, MySQL, etc.)
+* Automatically restart failing services
+* Alert on abnormal resource consumption
+* Log security-related events
+
+
+
+## Requirements
+
+* Linux system
 * Bash
-* Accès à `ps`, `awk`, `pgrep`, `systemctl`
-* Droits suffisants pour vérifier/redémarrer les services (root recommandé)
+* Access to `ps`, `awk`, `pgrep`, `systemctl`
+* Sufficient privileges to check/restart services (root recommended)
+
 
 
 ## Installation
 
-1. Cloner le dépôt :
+1. Clone the repository:
 
-   ```
-   git clone https://github.com/l1yas/sspa_bash
-   ```
-2. Rendre le script exécutable :
-
-   ```
-   chmod +x sspa_promon.sh
-   ```
-
-## Utilisation
-
-### Lancer une surveillance CPU
-
-* Valeur par défaut :
-
-  ```
-  ./sspa_promon.sh -c
-  ```
-* Seuil personnalisé :
-
-  ```
-  ./sspa_promon.sh -c 50
-  ```
-
-### Lancer une surveillance mémoire
-
-* Valeur par défaut :
-
-  ```
-  ./sspa_promon.sh -m
-  ```
-* Seuil personnalisé :
-
-  ```
-  ./sspa_promon.sh -m 60
-  ```
-
-### Combiner CPU et mémoire
-
+```bash
+git clone https://github.com/l1yas/sspa_bash
 ```
+
+2. Make the script executable:
+
+```bash
+chmod +x sspa_promon.sh
+```
+
+
+
+## Usage
+
+### Start CPU Monitoring
+
+* Default threshold:
+
+```bash
+./sspa_promon.sh -c
+```
+
+* Custom threshold:
+
+```bash
+./sspa_promon.sh -c 50
+```
+
+### Start Memory Monitoring
+
+* Default threshold:
+
+```bash
+./sspa_promon.sh -m
+```
+
+* Custom threshold:
+
+```bash
+./sspa_promon.sh -m 60
+```
+
+### Combine CPU and Memory Monitoring
+
+```bash
 ./sspa_promon.sh -c -m
 ./sspa_promon.sh -c 50 -m 60
 ```
 
-### Vérifier un service
+### Check a Service
 
-```
+```bash
 ./sspa_promon.sh -s ssh
 ```
 
-### Vérifier et redémarrer automatiquement un service
+### Check and Automatically Restart a Service
 
-```
+```bash
 ./sspa_promon.sh -s ssh -r
 ```
 
-## Alertes et logs
 
-Les alertes sont :
 
-* affichées dans le terminal
-* enregistrées dans un fichier de log dédié
+## Alerts and Logs
 
-Chaque événement inclut :
+Alerts are:
 
-* la date et l’heure
-* le type d’alerte
-* le processus ou service concerné
-* la consommation CPU/mémoire si applicable
-* 
-## Processus suspects
+* Displayed in the terminal
+* Recorded in a dedicated log file
 
-Le script inclut une liste de processus considérés comme suspects (ex. outils réseau offensifs).
-Si l’un d’eux est détecté en cours d’exécution, une alerte est générée et journalisée.
+Each event includes:
 
-Cette liste pourra être externalisée ou remplacée par une whitelist dans les versions futures.
+* Date and time
+* Alert type
+* Process or service involved
+* CPU/memory usage if applicable
 
-## Cas d’usage
 
-* Surveillance basique d’un serveur Linux
-* Détection de comportements anormaux
-* Outil pédagogique pour comprendre le monitoring système
-* Base pour un projet sécurité / cybersécurité
-* Mini agent de supervision personnalisé
 
-## Limitations actuelles
+## Suspicious Processes
 
-* Seuils statiques
-* Pas de mode daemon
-* Pas d’export JSON
-* Blacklist codée en dur
+The script contains a list of processes considered suspicious (e.g., offensive network tools).
+If any of these are detected running, an alert is triggered and logged.
 
-Ces limitations sont volontaires afin de privilégier la compréhension du fonctionnement interne.
+In future versions, this list could be externalized or replaced with a whitelist for more flexibility.
+
+
+
+## Use Cases
+
+* Basic Linux server monitoring
+* Detection of abnormal behavior
+* Educational tool for learning system monitoring
+* Base for security/cybersecurity projects
+* Mini custom monitoring agent
