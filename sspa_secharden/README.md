@@ -17,20 +17,20 @@ It is intended for **educational, lab, and defensive security use**.
 
 ## Features
 
-### 🔐 System Hardening
+### System Hardening
 
 * Fix non-compliant file permissions
 * Disable unnecessary or insecure services
 * Apply predefined firewall rules (UFW)
 * Harden SSH configuration (secure defaults)
 
-### 🧪 Dry-Run Mode
+### Dry-Run Mode
 
 * Simulates all actions
 * No system changes applied
 * Ideal for testing and validation
 
-### 📝 Full Logging
+### Full Logging
 
 * Every action is logged with timestamps
 * Clear distinction between applied and simulated actions
